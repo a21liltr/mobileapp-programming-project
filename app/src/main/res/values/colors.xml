@@ -3,4 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="colorForest">#263A29</color>
+    <color name="colorWoods">#41644A</color>
+    <color name="colorIrishClover">#52734D</color>
+    <color name="colorPicnic">#91C788</color>
+    <color name="colorGreedyGreen">#DDFFBC</color>
+    <color name="colorParmesan">#FEFFDE</color>
+    
 </resources>
