@@ -7,13 +7,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
     private final String json = "https://mobprog.webug.se/json-api?login=a21liltr";
-    private ArrayList<Duck> ducks;
+    private List<Duck> ducks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,11 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     @Override
     public void onPostExecute(String json) {
         Log.d("MainActivity", json);
+
+        Gson gson = new Gson();
+
+        Type duckListType = new TypeToken<List<Duck>>() {}.getType();
+        ducks = gson.fromJson(json, duckListType);
     }
 
 

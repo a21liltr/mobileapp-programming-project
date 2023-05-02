@@ -22,6 +22,10 @@ public class Duck {
     }
 
     public String info() {
-        return name + " " + curiosity;
+        return name + "is " + characteristics + ". " + curiosity;
+    }
+
+    public String getName() {
+        return name;
     }
 }
