@@ -6,6 +6,8 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
     private final String json = "https://mobprog.webug.se/json-api?login=a21liltr";
     private List<Duck> ducks;
+    private RecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +36,13 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Log.d("MainActivity", json);
 
         Gson gson = new Gson();
-
         Type duckListType = new TypeToken<List<Duck>>() {}.getType();
         ducks = gson.fromJson(json, duckListType);
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        adapter = new RecyclerViewAdapter(ducks, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 

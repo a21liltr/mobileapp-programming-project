@@ -21,11 +21,16 @@ public class Duck {
         this.curiosity = curiosity;
     }
 
-    public String info() {
-        return name + "is " + characteristics + ". " + curiosity;
-    }
-
     public String getName() {
         return name;
+    }
+    public String getCharacteristics() {
+        return characteristics;
+    }
+    public String getOrigin() {
+        return origin;
+    }
+    public String getCuriosity() {
+        return curiosity;
     }
 }
