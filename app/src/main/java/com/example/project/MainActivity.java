@@ -8,9 +8,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
-    private String json = "https://mobprog.webug.se/json-api?login=a21liltr";
+    private final String json = "https://mobprog.webug.se/json-api?login=a21liltr";
+    private ArrayList<Duck> ducks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
