@@ -1,11 +1,14 @@
 package com.example.project;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.gson.Gson;
+
+public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
     private String json = "https://mobprog.webug.se/json-api?login=a21liltr";
 
@@ -15,6 +18,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        new JsonTask(this).execute(json);
+    }
+
+    @Override
+    public void onPostExecute(String json) {
+        Log.d("MainActivity", json);
     }
 
 
