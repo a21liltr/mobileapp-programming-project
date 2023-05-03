@@ -3,9 +3,11 @@ package com.example.project;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Details extends AppCompatActivity {
@@ -30,6 +32,9 @@ public class Details extends AppCompatActivity {
         dataInfo = getIntent().getStringExtra("keyInfo");
         tvDescription.setText(dataInfo);
 
+        int dataPosition = getIntent().getIntExtra("keyPosition", -1);
+        imageSwitch(dataPosition);
+
         layout = findViewById(R.id.layout_details);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,5 +42,24 @@ public class Details extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void imageSwitch(int position) {
+        ImageView image = findViewById(R.id.imageView);
+        String resource;
+        switch (position) {
+            case 2:
+                resource = "@drawable/food";
+                break;
+            case 3:
+                resource = "@drawable/bath";
+                break;
+            default:
+                resource = "@drawable/question_mark";
+                break;
+        }
+        int imageResource = getResources().getIdentifier(resource, null, getPackageName());
+        Drawable res = getResources().getDrawable(imageResource);
+        image.setImageDrawable(res);
     }
 }

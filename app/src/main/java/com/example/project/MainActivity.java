@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         details.putExtra("keyName", duck.getName());
         details.putExtra("keyCharacter", duck.getCharacteristics());
         details.putExtra("keyInfo", info);
+        details.putExtra("keyPosition", position);
 
         System.out.println("Displaying details about " + duck.getName() + ". ");
         startActivity(details);
