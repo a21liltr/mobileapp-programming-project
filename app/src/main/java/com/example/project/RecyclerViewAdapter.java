@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-
+    private final IRecyclerView rv_interface;
     private List<Duck> ducks;
     private LayoutInflater inflater;
 
-    public RecyclerViewAdapter(List<Duck> ducks, Context context) {
+    public RecyclerViewAdapter(List<Duck> ducks, Context context, IRecyclerView rv_interface) {
         this.ducks = ducks;
         this.inflater = inflater.from(context);
+        this.rv_interface = rv_interface;
     }
 
     @NonNull
@@ -30,9 +31,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.tvName.setText(ducks.get(position).getName());
-        holder.tvCharacteristics.setText(ducks.get(position).getCharacteristics());
-        holder.tvCharacteristics.setText(ducks.get(position).getOrigin());
+        Duck duck = ducks.get(position);
+
+        String name = duck.getName();
+        String characteristics = duck.getCharacteristics();
+        String origin = duck.getOrigin();
+        String curiosity = duck.getCuriosity();
+
+        // Views in Main
+        holder.tvName.setText(name);
+        holder.tvCharacteristics.setText(characteristics.toUpperCase());
+        holder.tvOrigin.setText(origin);
+        holder.tvCuriosity.setText(curiosity);
     }
 
     @Override
@@ -41,13 +51,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvCharacteristics, tvOrigin;
+        TextView tvName, tvCharacteristics, tvOrigin, tvCuriosity;
+
+        TextView tvTitle, tvQuality, tvDescription;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            // Views in Main
             tvName = itemView.findViewById(R.id.tv_name);
             tvCharacteristics = itemView.findViewById(R.id.tv_characteristics);
             tvOrigin = itemView.findViewById(R.id.tv_origin);
+            tvCuriosity = itemView.findViewById(R.id.tv_curiosity);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (rv_interface != null) {
+                       int position = getAdapterPosition();
+
+                       if (position != RecyclerView.NO_POSITION) {
+                           rv_interface.onItemClick(position);
+                       }
+                    }
+                }
+            });
         }
     }
 }
