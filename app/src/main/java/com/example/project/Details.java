@@ -1,14 +1,16 @@
 package com.example.project;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.squareup.picasso.Picasso;
 
 public class Details extends AppCompatActivity {
     ConstraintLayout layout;
@@ -44,6 +46,7 @@ public class Details extends AppCompatActivity {
         });
     }
 
+    // Loads an url into ImageView using Picasso Library
     private void imageSwitch(int position) {
         ImageView image = findViewById(R.id.imageView);
         String resource;
@@ -55,11 +58,9 @@ public class Details extends AppCompatActivity {
                 resource = "@drawable/bath";
                 break;
             default:
-                resource = "@drawable/question_mark";
+                resource = "@drawable/unknown";
                 break;
         }
-        int imageResource = getResources().getIdentifier(resource, null, getPackageName());
-        Drawable res = getResources().getDrawable(imageResource);
-        image.setImageDrawable(res);
+        Picasso.get().load(resource).into(image);
     }
 }
