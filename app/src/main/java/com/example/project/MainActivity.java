@@ -1,8 +1,10 @@
 package com.example.project;
 
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,9 +17,9 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
+public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener, IRecyclerView {
 
-    private final String json = "https://mobprog.webug.se/json-api?login=a21liltr";
+    private final String url = "https://mobprog.webug.se/json-api?login=a21liltr";
     private List<Duck> ducks;
     private RecyclerViewAdapter adapter;
 
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        new JsonTask(this).execute(json);
+        new JsonTask(this).execute(url);
     }
 
     @Override
@@ -40,17 +42,55 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         ducks = gson.fromJson(json, duckListType);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        adapter = new RecyclerViewAdapter(ducks, this);
+        adapter = new RecyclerViewAdapter(ducks, this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        for (Duck d : ducks) {
+            Log.d("a21liltr", d.getName());
+        }
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Duck duck = ducks.get(position);
+        String info = "The " + duck.getName() + " is " + duck.getCharacteristics() + ". "
+                + "\nFun fact about it:\n\n" + duck.getCuriosity();
+
+        Intent details = new Intent(MainActivity.this, Details.class);
+
+        details.putExtra("keyName", duck.getName());
+        details.putExtra("keyCharacter", duck.getCharacteristics());
+        details.putExtra("keyInfo", info);
+
+        System.out.println("Displaying details about " + duck.getName() + ". ");
+        startActivity(details);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_option_about) {
+            launch();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void launch() {
+        Intent about = new Intent(MainActivity.this, About.class);
+        startActivity(about);
     }
 
 
     /*
-        TODO: RecyclerView med JSON-data
-          JSON-object w/ ID, Login, 3 <= attributes
-          5 <= JSON-object
-
         TODO: Separate "about"-screen
           -Target audience for app
 

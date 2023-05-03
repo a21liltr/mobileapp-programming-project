@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Project</string>
+    <string name="menu_option_about">ABOUT</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="paragraph">Lorem ipsum dolor sit amet. Vel consequatur accusantium sed rerum veniam At omnis harum!
+
+        Et voluptate minima qui blanditiis harum id sapiente assumenda et fugit sunt vel vero possimus et totam deleniti? Cum consequuntur harum ut minima illo et optio possimus.
+    </string>
 </resources>
