@@ -26,12 +26,27 @@ public class Duck implements Serializable {
     public String getName() {
         return name;
     }
+
     public String getCharacteristics() {
         return characteristics;
     }
+
+    public int getSize() {
+        return size;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
     public String getOrigin() {
         return origin;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
     public String getCuriosity() {
         return curiosity;
     }

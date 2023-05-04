@@ -36,7 +36,7 @@ public class Details extends AppCompatActivity {
         dataPosition = getIntent().getIntExtra("keyPosition", -1);
         Duck duck = ducks.get(dataPosition);
 
-        imageSwitch(dataPosition);
+        imageSwitch(dataPosition, ducks.size());
 
         tvTitle = findViewById(R.id.tv_item_title);
         tvTitle.setText(duck.getName());
@@ -59,23 +59,35 @@ public class Details extends AppCompatActivity {
     }
 
     // Loads an url into ImageView using Picasso Library
-    private void imageSwitch(int position) {
+    private void imageSwitch(int position, int listSize) {
         ImageView image = findViewById(R.id.imageView);
         String resource;
         switch (position) {
-            case 2:
+            case 0:
                 resource = "https://en.wikipedia.org/wiki/Crested_(duck_breed)#/media/File:Domestic-crested-duck-CamdenME.jpg";
+                break;
+            case 1:
+                resource = "https://en.wikipedia.org/wiki/Mandarin_duck#/media/File:Pair_of_mandarin_ducks.jpg";
+                break;
+            case 2:
+                resource = "https://en.wikipedia.org/wiki/Peking_duck#/media/File:Quanjude_Oven.jpg";
                 break;
             case 3:
                 resource = "https://en.wikipedia.org/wiki/Rubber_duck#/media/File:Rubber_Duck_(8374802487).jpg";
                 break;
-            default:
-                resource = "@drawable/unknown";
+            case 4:
+                resource = "https://en.wikipedia.org/wiki/Swedish_Blue#/media/File:Svensk_bl%C3%A5_anka.jpg";
                 break;
+            case 5:
+                resource = "https://en.wikipedia.org/wiki/American_Pekin#/media/File:Amerikanische_Pekingenten_2013_01,_cropped.jpg";
+                break;
+            default:
+                resource = "https://www.lpsrvc.com/wp-content/uploads/2015/01/question-mark-300x300.png";
         }
         Picasso.get().load(resource).into(image);
     }
 
+    // Returns list of ducks from shared preferences
     List<Duck> sharedDucks(){
         Gson gson = new Gson();
         SharedPreferences sharedP;
