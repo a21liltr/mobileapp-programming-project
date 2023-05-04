@@ -2,15 +2,17 @@ package com.example.project;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Duck {
+import java.io.Serializable;
+
+public class Duck implements Serializable {
     private String name;
-
-    @SerializedName("location")
-    private String origin;
-
     @SerializedName("company")
     private String characteristics;
-
+    private int size;
+    private int cost;
+    @SerializedName("location")
+    private String origin;
+    private String category;
     @SerializedName("auxdata")
     private String curiosity;
 

@@ -1,6 +1,7 @@
 package com.example.project;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     private final String url = "https://mobprog.webug.se/json-api?login=a21liltr";
     private List<Duck> ducks;
     private RecyclerViewAdapter adapter;
+    private Gson gson = new Gson();
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     @Override
     public void onPostExecute(String json) {
         Log.d("MainActivity", json);
-
-        Gson gson = new Gson();
         Type duckListType = new TypeToken<List<Duck>>() {}.getType();
         ducks = gson.fromJson(json, duckListType);
 
@@ -53,19 +54,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
     @Override
     public void onItemClick(int position) {
-        Duck duck = ducks.get(position);
-        String info = "The " + duck.getName() + " is " + duck.getCharacteristics() + ". "
-                + "\nFun fact about it:\n\n" + duck.getCuriosity();
-
-        Intent details = new Intent(MainActivity.this, Details.class);
-
-        details.putExtra("keyName", duck.getName());
-        details.putExtra("keyCharacter", duck.getCharacteristics());
-        details.putExtra("keyInfo", info);
-        details.putExtra("keyPosition", position);
-
-        System.out.println("Displaying details about " + duck.getName() + ". ");
-        startActivity(details);
+        launchDetails(position);
     }
 
     @Override
@@ -78,14 +67,45 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_option_about) {
-            launch();
+            launchAbout();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void launch() {
+    void store(List<Duck> list) {
+        SharedPreferences sharedP;
+        SharedPreferences.Editor editor;
+
+        sharedP = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+
+        editor = sharedP.edit();
+        editor.remove("key").commit();
+        editor.putString("key", json);
+        editor.commit();
+    }
+
+    public void launchDetails(int position) {
+        Duck duck = ducks.get(position);
+        String info = "The " + duck.getName() + " is " + duck.getCharacteristics() + ". "
+                + "\nFun fact about it:\n\n" + duck.getCuriosity();
+
+        store(ducks);
+
+        Intent details = new Intent(MainActivity.this, Details.class);
+
+        details.putExtra("keyPosition", position);
+        details.putExtra("keyInfo", info);
+
+        System.out.println("Displaying details about " + duck.getName() + ". ");
+        startActivity(details);
+    }
+
+    public void launchAbout() {
         Intent about = new Intent(MainActivity.this, About.class);
         startActivity(about);
     }
