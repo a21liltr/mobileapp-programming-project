@@ -64,27 +64,30 @@ public class Details extends AppCompatActivity {
         String resource;
         switch (position) {
             case 0:
-                resource = "https://en.wikipedia.org/wiki/Crested_(duck_breed)#/media/File:Domestic-crested-duck-CamdenME.jpg";
+                resource = "https://cdn.pixabay.com/photo/2021/04/16/13/09/crested-duck-6183539_960_720.png";
                 break;
             case 1:
-                resource = "https://en.wikipedia.org/wiki/Mandarin_duck#/media/File:Pair_of_mandarin_ducks.jpg";
+                resource = "https://cdn.pixabay.com/photo/2017/02/11/13/24/animal-2057645_960_720.png";
                 break;
-            case 2:
-                resource = "https://en.wikipedia.org/wiki/Peking_duck#/media/File:Quanjude_Oven.jpg";
-                break;
+            //case 2:
+            //    resource = "https://en.wikipedia.org/wiki/Peking_duck#/media/File:Quanjude_Oven.jpg";
+            //    break;
             case 3:
-                resource = "https://en.wikipedia.org/wiki/Rubber_duck#/media/File:Rubber_Duck_(8374802487).jpg";
+                resource = "https://e7.pngegg.com/pngimages/842/277/png-clipart-rubber-duck-rubber-duck.png";
                 break;
-            case 4:
-                resource = "https://en.wikipedia.org/wiki/Swedish_Blue#/media/File:Svensk_bl%C3%A5_anka.jpg";
-                break;
-            case 5:
-                resource = "https://en.wikipedia.org/wiki/American_Pekin#/media/File:Amerikanische_Pekingenten_2013_01,_cropped.jpg";
-                break;
+            //case 4:
+            //    resource = "https://en.wikipedia.org/wiki/Swedish_Blue#/media/File:Svensk_bl%C3%A5_anka.jpg";
+            //    break;
+            //case 5:
+            //    resource = "https://en.wikipedia.org/wiki/American_Pekin#/media/File:Amerikanische_Pekingenten_2013_01,_cropped.jpg";
+            //    break;
             default:
-                resource = "https://www.lpsrvc.com/wp-content/uploads/2015/01/question-mark-300x300.png";
+                throw new IllegalStateException("Unexpected value: " + position);
         }
-        Picasso.get().load(resource).into(image);
+        Picasso.get().load(resource)
+                .error(R.drawable.unknown)
+                .placeholder(R.drawable.egg)
+                .into(image);
     }
 
     // Returns list of ducks from shared preferences
