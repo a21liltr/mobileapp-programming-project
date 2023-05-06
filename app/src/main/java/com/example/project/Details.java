@@ -67,7 +67,6 @@ public class Details extends AppCompatActivity {
         });
     }
 
-    // Loads an url into ImageView using Picasso Library
     private void imageSwitch(int position, int listSize) {
         ImageView image = findViewById(R.id.imageView);
         String resource;
