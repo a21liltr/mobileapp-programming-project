@@ -18,4 +18,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- Styling of card views "tags" -->
+    <style name="CardViewTagStyle" parent="CardView">
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="cardCornerRadius">10dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/pinkLips</item>
+    </style>
+
 </resources>
