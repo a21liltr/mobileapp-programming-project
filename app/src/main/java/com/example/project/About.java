@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso;
 public class About extends AppCompatActivity {
     Toolbar toolbar;
     ImageView header;
-    String url =
+    String url = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
