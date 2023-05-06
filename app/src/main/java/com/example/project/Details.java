@@ -54,9 +54,16 @@ public class Details extends AppCompatActivity {
         tvCharacteristics.setText(duck.getCharacteristics().toUpperCase());
 
         tvDescription = findViewById(R.id.tv_item_description);
-        dataInfo = getIntent().getStringExtra("keyInfo");
-        tvDescription.setText(dataInfo);
-
+        String info = "The " + duck.getName()
+                + " is part of the "
+                + duck.getCategory()
+                + " category."
+                + "\nHere is an interesting fact about it:\n\n"
+                + duck.getCuriosity();
+        String current = "\n\nThe current market price for a " + duck.getName()
+                + " is currently an amount of about " + duck.getCost()
+                + " USD according to a well established and widely known search engine that is frequented immensely.";
+        tvDescription.setText(info + current);
 
         layout = findViewById(R.id.layout_details);
         layout.setOnClickListener(new View.OnClickListener() {
