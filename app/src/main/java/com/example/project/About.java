@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.View;
 
-import com.squareup.picasso.Picasso;
+import com.google.android.material.appbar.AppBarLayout;
 
 public class About extends AppCompatActivity {
     Toolbar toolbar;
-    ImageView header;
-    String url = "";
+    AppBarLayout toolbarLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,5 +18,13 @@ public class About extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar_collapsing);
         setSupportActionBar(toolbar);
+
+        toolbarLayout = findViewById(R.id.appBarLayout);
+        toolbarLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
