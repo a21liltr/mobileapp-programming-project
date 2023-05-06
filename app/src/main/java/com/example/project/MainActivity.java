@@ -91,8 +91,12 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
     public void launchDetails(int position) {
         Duck duck = ducks.get(position);
-        String info = "The " + duck.getName() + " is " + duck.getCharacteristics() + ". "
-                + "\nFun fact about it:\n\n" + duck.getCuriosity();
+        String info = "The " + duck.getName()
+                + " is part of the "
+                + duck.getCategory()
+                + " category."
+                + "\nHere is an interesting fact about it:\n\n"
+                + duck.getCuriosity();
 
         store(ducks);
 

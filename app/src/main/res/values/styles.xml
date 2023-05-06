@@ -18,13 +18,40 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <!-- Styling of card views "tags" -->
+    <!-- Adds shadow to text -->
+    <style name="TextShadows" parent="@android:style/Widget.TextView">
+        <item name="android:shadowRadius">2</item>
+        <item name="android:shadowDx">1.5</item>
+        <item name="android:shadowDy">1.5</item>
+    </style>
+
+    <!-- Styling of card views "tags" in detailed view of an item -->
     <style name="CardViewTagStyle" parent="CardView">
         <item name="android:layout_marginStart">4dp</item>
         <item name="android:layout_marginTop">4dp</item>
-        <item name="cardCornerRadius">10dp</item>
+        <item name="cardCornerRadius">12dp</item>
         <item name="cardElevation">4dp</item>
         <item name="cardBackgroundColor">@color/pinkLips</item>
+    </style>
+
+    <!-- Styling of text inside a card view tagged "tag" -->
+    <style name="TextViewTagsStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/pinkHimalayanSalt</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:shadowDx">1.5</item>
+        <item name="android:shadowDy">1.5</item>
+    </style>
+
+    <style name="CardViewDescriptionBox" parent="CardView">
+        <item name="cardBackgroundColor">@color/yellowDevonshire</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
     </style>
 
 </resources>
