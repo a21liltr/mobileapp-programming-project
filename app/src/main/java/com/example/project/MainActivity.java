@@ -9,7 +9,6 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,13 +16,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener, IRecyclerView {
-    private final String url = "https://mobprog.webug.se/json-api?login=a21liltr";
     private List<Duck> ducks;
-    private RecyclerViewAdapter adapter;
     private Gson gson = new Gson();
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -32,9 +28,10 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar_collapsing);
+        Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
 
+        String url = "https://mobprog.webug.se/json-api?login=a21liltr";
         new JsonTask(this).execute(url);
 
 
@@ -48,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         store(ducks);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        adapter = new RecyclerViewAdapter(ducks, this, this);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(ducks, this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

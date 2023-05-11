@@ -84,24 +84,24 @@ public class Details extends AppCompatActivity {
             case 1:
                 resource = "https://cdn.pixabay.com/photo/2017/02/11/13/24/animal-2057645_960_720.png";
                 break;
-            case 2:
-                resource = "https://laboucherie.mt/wp-content/uploads/2021/10/2.-History-of-Peking-Duck.png";
-                break;
             case 3:
-                resource = "https://www.pngall.com/wp-content/uploads/11/Rubber-Duck-No-Background.png";
-                break;
-            case 4:
-                resource = "https://thehipchick.com/wp-content/uploads/2022/10/Swedish-Yellow-duck-ee221007-1024x597.png";
+                resource = "https://images.unsplash.com/photo-1632877943287-64636ca57b7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80";
                 break;
             case 5:
-                resource = "https://thumbs.dreamstime.com/b/duck-white-duck-transparent-background-126773983.jpg";
+                resource = "https://images.unsplash.com/photo-1592676600551-fa8a3029947b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80";
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + position);
+                resource = "";
         }
+        loadImage(resource, image);
+    }
+
+    private void loadImage(String resource, ImageView image) {
         Picasso.get().load(resource)
                 .error(R.drawable.unknown)
                 .placeholder(R.drawable.egg)
+                .centerCrop()
+                .fit()
                 .into(image);
     }
 
