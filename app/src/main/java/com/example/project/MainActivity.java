@@ -10,7 +10,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private String selectedFilter = "all";
+    private ArrayList<Duck> filteredDucks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +45,9 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Log.d("a21liltr", json);
         Type duckListType = new TypeToken<List<Duck>>() {}.getType();
         ducks = gson.fromJson(json, duckListType);
-        storeDucks(ducks);
 
         recyclerView = findViewById(R.id.recycler_view);
-        filterList(selectedFilter);
+        filteredDucks = filterList(selectedFilter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -74,23 +73,13 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         return super.onOptionsItemSelected(item);
     }
 
-    private void storeDucks(List<Duck> list) {
-        sharedPreferences = getApplicationContext().getSharedPreferences("myDucks", MODE_PRIVATE);
-
-        Gson gson = new Gson();
-        String json = gson.toJson(list);
-
-        editor = sharedPreferences.edit();
-        editor.remove("keyList").commit();
-        editor.putString("keyList", json);
-        editor.commit();
-    }
-
     public void launchDetails(int position) {
-        Duck duck = ducks.get(position);
+        String jsonDuck;
+        Duck duck = filteredDucks.get(position);
+        jsonDuck = gson.toJson(duck);
 
         Intent details = new Intent(MainActivity.this, Details.class);
-        details.putExtra("keyPosition", position);
+        details.putExtra("keyDuck", jsonDuck);
 
         startActivity(details);
     }
@@ -101,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         startActivity(about);
     }
 
-    private void filterList(String status) {
+    private ArrayList<Duck> filterList(String status) {
         selectedFilter = status;
         ArrayList<Duck> filteredList = new ArrayList<Duck>();
         for(Duck duck: ducks) {
@@ -114,24 +103,25 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         }
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(filteredList, this, this);
         recyclerView.setAdapter(adapter);
-        storeDucks(filteredList);
         storeFilter(selectedFilter);
+
+        return filteredList;
     }
 
     public void filterAll(View view) {
-        filterList("all");
+        filteredDucks = filterList("all");
     }
 
     public void filterFood(View view) {
-        filterList("food");
+        filteredDucks = filterList("food");
     }
 
     public void filterPets(View view) {
-        filterList("pets");
+        filteredDucks = filterList("pets");
     }
 
     public void filterToys(View view) {
-        filterList("toys");
+        filteredDucks = filterList("toys");
     }
 
     private void storeFilter(String selectedFilter) {

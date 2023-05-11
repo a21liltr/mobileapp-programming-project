@@ -14,14 +14,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Details extends AppCompatActivity {
     ConstraintLayout layout;
     TextView tvTitle, tvOrigin, tvSize, tvCost,  tvCharacteristics, tvCategory, tvDescription;
-    String dataInfo;
-    int dataPosition;
-    List<Duck> ducks;
+    String jsonDuck;
+    Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +29,8 @@ public class Details extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         // Getting required info for ducks
-        ducks = sharedDucks();
-        dataPosition = getIntent().getIntExtra("keyPosition", -1);
-        Duck duck = ducks.get(dataPosition);
+        jsonDuck = getIntent().getStringExtra("keyDuck");
+        Duck duck = gson.fromJson(jsonDuck, Duck.class);
 
         imageSwitch(duck);
 
@@ -106,16 +105,5 @@ public class Details extends AppCompatActivity {
                 .centerCrop()
                 .fit()
                 .into(image);
-    }
-
-    // Returns list of ducks from shared preferences
-    private List<Duck> sharedDucks(){
-        Gson gson = new Gson();
-        SharedPreferences sharedP;
-        sharedP = getApplicationContext().getSharedPreferences("myDucks", MODE_PRIVATE);
-        String getShared = sharedP.getString("keyList", "");
-        List<Duck> ducks = gson.fromJson(getShared, new TypeToken<List<Duck>>(){}.getType());
-
-        return ducks;
     }
 }
