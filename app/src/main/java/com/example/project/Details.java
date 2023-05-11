@@ -2,6 +2,7 @@ package com.example.project;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ public class Details extends AppCompatActivity {
         dataPosition = getIntent().getIntExtra("keyPosition", -1);
         Duck duck = ducks.get(dataPosition);
 
-        imageSwitch(dataPosition, ducks.size());
+        imageSwitch(duck);
 
         // Setting views
         tvTitle = findViewById(R.id.tv_item_title);
@@ -72,26 +73,28 @@ public class Details extends AppCompatActivity {
                 finish();
             }
         });
+
+        Log.d("a21liltr", "Displaying details about " + duck.getName() + ". ");
     }
 
-    private void imageSwitch(int position, int listSize) {
+    private void imageSwitch(Duck duck) {
         ImageView image = findViewById(R.id.imageView);
         String resource;
-        switch (position) {
-            case 0:
+        switch (duck.getName()) {
+            case "Crested Duck":
                 resource = "https://cdn.pixabay.com/photo/2021/04/16/13/09/crested-duck-6183539_960_720.png";
                 break;
-            case 1:
+            case "Mandarin Duck":
                 resource = "https://cdn.pixabay.com/photo/2017/02/11/13/24/animal-2057645_960_720.png";
                 break;
-            case 3:
+            case "Rubber Duck":
                 resource = "https://images.unsplash.com/photo-1632877943287-64636ca57b7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80";
                 break;
-            case 5:
+            case "White Pekin":
                 resource = "https://images.unsplash.com/photo-1592676600551-fa8a3029947b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80";
                 break;
             default:
-                resource = "";
+                resource = "R.drawable.unknown";
         }
         loadImage(resource, image);
     }

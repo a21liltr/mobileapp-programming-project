@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Intent details = new Intent(MainActivity.this, Details.class);
         details.putExtra("keyPosition", position);
 
-        Log.d("a21liltr", "Displaying details about " + duck.getName() + ". ");
         startActivity(details);
     }
 
@@ -117,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
                 filterAll(recyclerView);
             }
         }
-        storeFilter(selectedFilter);
+        //storeFilter(selectedFilter);
+        storeDucks(filteredList);
     }
 
     public void filterAll(View view) {
