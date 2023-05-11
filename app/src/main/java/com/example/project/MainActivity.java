@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Log.d("MainActivity", json);
         Type duckListType = new TypeToken<List<Duck>>() {}.getType();
         ducks = gson.fromJson(json, duckListType);
-        store(ducks);
+        storeDucks(ducks);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(ducks, this, this);
@@ -72,15 +72,15 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         return super.onOptionsItemSelected(item);
     }
 
-    void store(List<Duck> list) {
-        sharedPreferences = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
+    private void storeDucks(List<Duck> list) {
+        sharedPreferences = getApplicationContext().getSharedPreferences("myDucks", MODE_PRIVATE);
 
         Gson gson = new Gson();
         String json = gson.toJson(list);
 
         editor = sharedPreferences.edit();
-        editor.remove("key").commit();
-        editor.putString("key", json);
+        editor.remove("keyList").commit();
+        editor.putString("keyList", json);
         editor.commit();
     }
 

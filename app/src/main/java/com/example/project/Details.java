@@ -106,11 +106,11 @@ public class Details extends AppCompatActivity {
     }
 
     // Returns list of ducks from shared preferences
-    List<Duck> sharedDucks(){
+    private List<Duck> sharedDucks(){
         Gson gson = new Gson();
         SharedPreferences sharedP;
-        sharedP = getApplicationContext().getSharedPreferences("myPrefs", MODE_PRIVATE);
-        String getShared = sharedP.getString("key", "");
+        sharedP = getApplicationContext().getSharedPreferences("myDucks", MODE_PRIVATE);
+        String getShared = sharedP.getString("keyList", "");
         List<Duck> ducks = gson.fromJson(getShared, new TypeToken<List<Duck>>(){}.getType());
 
         return ducks;
