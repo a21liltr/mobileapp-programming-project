@@ -8,7 +8,7 @@ Results:
 Initial launch:
 ![](Screenshot_intial_screen.png)
 
-Using a filter:
+Using a filter (TOYS selected):
 ![](Screenshot_filtered_screen.png)
 
 After clicking on an item (separate activity):
