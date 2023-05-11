@@ -6,4 +6,9 @@
 
         Et voluptate minima qui blanditiis harum id sapiente assumenda et fugit sunt vel vero possimus et totam deleniti? Cum consequuntur harum ut minima illo et optio possimus.
     </string>
+
+    <string name="category_all">All</string>
+    <string name="category_toys">Toys</string>
+    <string name="category_pets">Pets and Decorations</string>
+    <string name="category_food">Food</string>
 </resources>
