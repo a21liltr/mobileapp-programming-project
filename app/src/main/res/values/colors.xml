@@ -4,21 +4,6 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="greenForest">#263A29</color>
-    <color name="greenWoods">#41644A</color>
-    <color name="greenIrishClover">#52734D</color>
-    <color name="greenPicnic">#91C788</color>
-    <color name="greenGreedy">#DDFFBC</color>
-
-    <color name="purpleElectricIndigo">#5800FF</color>
-    <color name="purpleMurasaki">#8946A6</color>
-    <color name="purpleUltraviolet">#A63EC5</color>
-    <color name="purpleUrnOrchid">#B762C1</color>
-    <color name="purpleNeon">#CE49BF</color>
-    <color name="purpleBlossoms">#EA99D5</color>
-
-    <color name="colorLivingCoral">#FF6D60</color>
-
     <color name="redDarkMatter">#160108</color>
     <color name="redPlumCheese">#6b0626</color>
     <color name="redRosePetal">#a9093b</color>
@@ -34,14 +19,6 @@
     <color name="pinkCreamyStrawberry">#fcd4e1</color>
     <color name="pinkHimalayanSalt">#FEE3EC</color>
     <color name="pinkPaleCherryBlossom">#fef3f6</color>
-
-
-
-    <color name="bluePaleCloud">#DBDFEA</color>
-    <color name="blueWarmWater">#B9FFF8</color>
-    <color name="blueAncientIce">#72FFFF</color>
-    <color name="blueNeon">#00D7FF</color>
-    <color name="blueStarfleet">#0096FF</color>
 
     <color name="yellowBurnt">#4F200D</color>
     <color name="yellowVividOrange">#FF6000</color>

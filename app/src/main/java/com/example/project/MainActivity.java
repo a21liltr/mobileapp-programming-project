@@ -107,24 +107,19 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         for(Duck duck: ducks) {
             if(duck.getCategory().toLowerCase().contains(status.toLowerCase())) {
                 filteredList.add(duck);
-
-                RecyclerViewAdapter adapter = new RecyclerViewAdapter(filteredList, this, this);
-                recyclerView.setAdapter(adapter);
-                Log.d("a21liltr", "Category " + duck.getCategory() + " was clicked.");
             }
             if(selectedFilter.equals("all")) {
-                filterAll(recyclerView);
+                filteredList.add(duck);
             }
         }
-        //storeFilter(selectedFilter);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(filteredList, this, this);
+        recyclerView.setAdapter(adapter);
         storeDucks(filteredList);
+        storeFilter(selectedFilter);
     }
 
     public void filterAll(View view) {
-        selectedFilter = "all";
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(ducks, this, this);
-        recyclerView.setAdapter(adapter);
-        CardView cardAll = findViewById(R.id.card_filter_all);
+        filterList("all");
     }
 
     public void filterFood(View view) {
@@ -140,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     }
 
     private void storeFilter(String selectedFilter) {
-        sharedPreferences = getApplicationContext().getSharedPreferences("myFilter", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("myFilter", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         editor.remove("myFilter").commit();
         editor.putString("myFilter", selectedFilter);
