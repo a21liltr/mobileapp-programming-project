@@ -79,8 +79,11 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         jsonDuck = gson.toJson(duck);
 
         Intent details = new Intent(MainActivity.this, Details.class);
+
+        // Passing clicked duck object as json string to details activity.
         details.putExtra("keyDuck", jsonDuck);
 
+        Log.d("a21liltr", "Displaying details about " + filteredDucks.get(position) + ".");
         startActivity(details);
     }
 
@@ -135,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("a21liltr", "Activity resumed.");
         String defaultFilter = "all";
         sharedPreferences = getSharedPreferences("myFilter", MODE_PRIVATE);
         selectedFilter = sharedPreferences.getString("myFilter", defaultFilter);
